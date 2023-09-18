@@ -7,7 +7,7 @@ if ! command -v brew > /dev/null; then
 
 	echo "Adding brew (Homebrew) to the path"
 	(echo; echo "eval '$(/opt/homebrew/bin/brew shellenv)'") >> /Users/"${USER}"/.zprofile
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+	eval "$(/opt/homebrew/bin/brew shellenv)"
 else
 	echo "Homebrew is already installed."
 fi
@@ -28,9 +28,10 @@ packages="
 	ripgrep
 	ripgrep-all
 	fd
+	npm
 "
 for package in $packages; do
-
+	
 	if ! brew list "$package" > /dev/null 2>&1; then
 		brew install "$package" 
 	else
@@ -48,11 +49,17 @@ casks="
 	discord
 	spotify
 	mos
+	aldente
 	hammerspoon
 	appcleaner
 	microsoft-word
 	microsoft-powerpoint
 	microsoft-excel
+	blender
+	jdownloader
+	plex
+	openvpn-connect
+	notion
 "
 #bitwarden # Installed via App Store to have Safari Extension
 for cask in ${casks}; do
@@ -63,6 +70,34 @@ for cask in ${casks}; do
 		echo "$cask is already installed."
 	fi
 done
+
+# MacOS App Store (mas)
+
+masApps="
+    whatsapp
+    telegram
+    slack
+    mattermost
+    notion
+    microsoft remote desktop 
+"
+# mas search whatsapp
+# mas install 1147396723
+
+# mas search telegram
+# mas install 747648890
+
+# mas install slack 803453959
+
+# Others
+
+# Install Nerd Fonts
+if [ ! -f "$HOME/Library/Fonts/Droid Sans Mono for Powerline Nerd Font Complete.otf" ]; then
+    curl -sS https://webi.sh/nerdfont | sh
+    source ~/.config/envman/PATH.env
+else
+	printf "\nNerdFonts already installed."
+fi
 
 # ZSH Configs
 printf "\nInstalling ZSH configs...\n"
@@ -101,6 +136,7 @@ else
 fi
 
 printf "\n"
+
 # Hamerspoon
 
 # ControlEscape
@@ -119,8 +155,6 @@ fi
 
 
 # Docker
-
-
 
 # Safari Extensions (Install using mas)
 # Bitwarden

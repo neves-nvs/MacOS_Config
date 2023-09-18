@@ -56,6 +56,7 @@ defaults write com.apple.finder NewWindowTargetPath -string "file://$HOME/Downlo
 
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool false
 defaults write com.apple.finder ShowPathbar -bool true # ShowPathbar apparently does not exist at first, only after togling on manually
+
 finderReload=true
 
 if [ $finderReload = true ]; then
@@ -86,4 +87,9 @@ default write com.caldis.Mos reverse 1
 # disable smooth scrolling
 default write com.caldis.Mos smooth 0
 
+# AlDente
+# Disable dock icon
 
+# iTerm2
+# Enable Nerd Font
+# Set iTerm2 to start fullscreen
