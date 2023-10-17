@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Homebrew
 if ! command -v brew > /dev/null; then
@@ -14,7 +14,7 @@ fi
 
 # Packages
 printf "\nInstalling packages...\n"
-packages="
+packages=(
 	git
 	wget
 	nvim
@@ -29,19 +29,20 @@ packages="
 	ripgrep-all
 	fd
 	npm
-"
-for package in $packages; do
-	
-	if ! brew list "$package" > /dev/null 2>&1; then
-		brew install "$package" 
-	else
+	fzf
+)
+current_packages=$(brew list --formulae)
+for package in "${packages[@]}"; do
+	if  echo "$current_packages" | grep -q "$package" || brew list "$package" > /dev/null 2>&1; then
 		echo "$package is already installed."
+	else
+		brew install --formulae "$package" 
 	fi
 done
 
 # Casks
 printf "\nInstalling casks...\n"
-casks="
+casks=(
 	visual-studio-code
 	iterm2
 	google-chrome
@@ -60,34 +61,40 @@ casks="
 	plex
 	openvpn-connect
 	notion
-"
+	mactex
+	bettermouse
+	the-unarchiver
+)
 #bitwarden # Installed via App Store to have Safari Extension
-for cask in ${casks}; do
-  	# Install the Cask
-	if ! brew list --cask | grep "$cask" > /dev/null; then
-  		brew install --cask "$cask"
-	else
+current_casks=$(brew list --cask)
+for cask in "${casks[@]}"; do
+	if  echo "$current_casks" | grep -q "$cask" || brew list "$cask" > /dev/null 2>&1; then
 		echo "$cask is already installed."
+	else
+		#brew install --formulae "$cask" 
+		true
 	fi
 done
 
+exit
 # MacOS App Store (mas)
-
-masApps="
+mas_apps=(
     whatsapp
     telegram
     slack
     mattermost
     notion
     microsoft remote desktop 
-"
-# mas search whatsapp
+)
+# mas search whatsapp Desktop
 # mas install 1147396723
 
 # mas search telegram
 # mas install 747648890
 
 # mas install slack 803453959
+
+# mas install bitwarden 1352778147
 
 # Others
 
