@@ -76,7 +76,6 @@ for cask in "${casks[@]}"; do
 	fi
 done
 
-exit
 # MacOS App Store (mas)
 mas_apps=(
     whatsapp
